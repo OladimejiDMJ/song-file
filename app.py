@@ -19,10 +19,11 @@ class Songfile(db.Model):
       db.session.commit()
       return self
 
-    def __init__(self,song_title,duration_in_seconds,uploaded_time):
+    def __init__(self,song_title,duration_in_seconds):
         self.song_title=song_title
         self.duration_in_seconds=duration_in_seconds
-        self.uploaded_time=uploaded_time
+        
+        
     def __repr__(self):
         return '' % self.id
 db.create_all()
@@ -32,10 +33,8 @@ class SongSchema(ModelSchema):
     class Meta(ModelSchema.Meta):
         model = Songfile
         sqla_session = db.session
-    id = fields.Number(dump_only=True)
-    song_title = fields.String(required=True)
-    duration_in_seconds = fields.Number(required=True)
-    uploaded_time = datetime.now()
+   
+    
 
 
 @app.route('/songfile', methods = ['POST'])
